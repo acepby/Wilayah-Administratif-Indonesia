@@ -31,10 +31,10 @@ echo "Writing MySQL dump file"
 
 echo "Testing MySQL dump..."
 echo "> Creating database"
-mysql -u root -h mysql -e "CREATE DATABASE IF NOT EXISTS indonesia;"
+mysql -u root -p  -e "CREATE DATABASE IF NOT EXISTS indonesia;"
 echo "> Importing database"
-mysql -u root -h mysql indonesia < ../mysql/indonesia.sql
+mysql -u root -p indonesia < ../mysql/indonesia.sql
 echo "> Statistics"
-mysql -u root -h mysql -t indonesia < ./statistics.sql
+mysql -u root -p -t indonesia < ./statistics.sql
 
 echo "Done."
