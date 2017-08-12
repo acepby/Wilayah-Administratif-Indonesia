@@ -12,7 +12,7 @@ The data were `curl`-ed from BPS site:
 with `a`, `i`, `u`, `e` and `o` as the keywords.
 
 ## Statistics
-
+```
 +------+---------------------------+----------------+-----------+----------------+
 | Kode | Provinsi                  | Kabupaten/Kota | Kecamatan | Desa/Kelurahan |
 +------+---------------------------+----------------+-----------+----------------+
@@ -51,8 +51,6 @@ with `a`, `i`, `u`, `e` and `o` as the keywords.
 | 91   | PAPUA BARAT               |             13 |       189 |           1622 |
 | 94   | PAPUA                     |             29 |       567 |           4924 |
 +------+---------------------------+----------------+-----------+----------------+
-```
-
 ```
 
 ## Generate new data
