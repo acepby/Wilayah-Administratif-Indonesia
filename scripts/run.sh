@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DB_NAME="indonesia"
-
+DB_PASS=""
 TMP_DIR="/tmp/indonesia"
 
 mkdir -p ${TMP_DIR}
@@ -31,10 +31,10 @@ echo "Writing MySQL dump file"
 
 echo "Testing MySQL dump..."
 echo "> Creating database"
-mysql -u root -p  -e "CREATE DATABASE IF NOT EXISTS indonesia;"
+mysql -u root -p "$DB_PASS"  -e "CREATE DATABASE IF NOT EXISTS indonesia;"
 echo "> Importing database"
-mysql -u root -p indonesia < ../mysql/indonesia.sql
+mysql -u root -p "$DB_PASS" indonesia < ../mysql/indonesia.sql
 echo "> Statistics"
-mysql -u root -p -t indonesia < ./statistics.sql
+mysql -u root -p"$DB_PASS" -t indonesia < ./statistics.sql
 
 echo "Done."

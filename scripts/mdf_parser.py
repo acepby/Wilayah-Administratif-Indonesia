@@ -4,6 +4,9 @@ import csv
 import sys
 import xml.etree.cElementTree as ET
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 provinces_dict = {}
 regencies_dict = {}
 districts_dict = {}
