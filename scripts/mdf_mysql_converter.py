@@ -35,18 +35,18 @@ def write_insert_header(table_name):
     print "/*!40000 ALTER TABLE `%s` DISABLE KEYS */;" % (table_name)
 
 
-def write_insert_body(table_name, rows):
+def write_insert_body(table_name,level, rows):
     counter = 0
     last_row = len(rows) - 1
     for row in rows:
         if (counter % SPLIT_ROWS == 0):
             print "INSERT INTO `%s` VALUES" % (table_name)
         if (counter == last_row or counter % SPLIT_ROWS == SPLIT_ROWS - 1):
-            print("  ('%s', '%s', '%s');"
-                  % (row[0], row[1], MySQLdb.escape_string(row[2])))
+            print("  ('%s', '%s', '%s','%s');"
+                  % (row[0], row[1], MySQLdb.escape_string(row[2]),level))
         else:
-            print("  ('%s', '%s', '%s'),"
-                  % (row[0], row[1], MySQLdb.escape_string(row[2])))
+            print("  ('%s', '%s', '%s','%s'),"
+                  % (row[0], row[1], MySQLdb.escape_string(row[2]),level))
         counter += 1
 
 
@@ -56,42 +56,45 @@ def write_insert_footer(table_name):
 
 
 def write_provinces(path):
-    write_insert_header("provinces")
+    write_insert_header("lokasi")
 
     counter = 0
     rows = csv_to_list(path)
     last_row = len(rows) - 1
     for row in rows:
         if (counter % SPLIT_ROWS == 0):
-            print "INSERT INTO `provinces` VALUES"
+            print "INSERT INTO `lokasi` VALUES"
         if (counter == last_row or counter % SPLIT_ROWS == SPLIT_ROWS - 1):
-            print "  ('%s', '%s');" % (row[0], MySQLdb.escape_string(row[1]))
+            print "  ('%s', '%s','%s','%s');" % (row[0],0, MySQLdb.escape_string(row[1]),'PROV')
         else:
-            print "  ('%s', '%s')," % (row[0], MySQLdb.escape_string(row[1]))
+            print "  ('%s', '%s','%s','%s')," % (row[0],0, MySQLdb.escape_string(row[1]),'PROV')
         counter += 1
 
-    write_insert_footer("provinces")
+    #write_insert_footer("lokasi")
 
 
 def write_regencies(path):
     rows = csv_to_list(path)
-    write_insert_header("regencies")
-    write_insert_body("regencies", rows)
-    write_insert_footer("regencies")
+    level='KAB'
+    #write_insert_header("regencies")
+    write_insert_body("lokasi",level, rows)
+    #write_insert_footer("regencies")
 
 
 def write_districts(path):
     rows = csv_to_list(path)
-    write_insert_header("districts")
-    write_insert_body("districts", rows)
-    write_insert_footer("districts")
+    level='KEC'
+    #write_insert_header("districts")
+    write_insert_body("lokasi",level, rows)
+    #write_insert_footer("districts")
 
 
 def write_villages(path):
     rows = csv_to_list(path)
-    write_insert_header("villages")
-    write_insert_body("villages", rows)
-    write_insert_footer("villages")
+    level='DESA'
+    #write_insert_header("villages")
+    write_insert_body("lokasi",level, rows)
+    write_insert_footer("lokasi")
 
 
 def main(argv):
