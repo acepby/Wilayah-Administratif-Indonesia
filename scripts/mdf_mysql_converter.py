@@ -56,14 +56,14 @@ def write_insert_footer(table_name):
 
 
 def write_provinces(path):
-    write_insert_header("lokasi")
+    write_insert_header("wilayahID")
 
     counter = 0
     rows = csv_to_list(path)
     last_row = len(rows) - 1
     for row in rows:
         if (counter % SPLIT_ROWS == 0):
-            print "INSERT INTO `lokasi` VALUES"
+            print "INSERT INTO `wilayahID` VALUES"
         if (counter == last_row or counter % SPLIT_ROWS == SPLIT_ROWS - 1):
             print "  ('%s', '%s','%s','%s');" % (row[0],0, MySQLdb.escape_string(row[1]),'PROV')
         else:
@@ -77,7 +77,7 @@ def write_regencies(path):
     rows = csv_to_list(path)
     level='KAB'
     #write_insert_header("regencies")
-    write_insert_body("lokasi",level, rows)
+    write_insert_body("wilayahID",level, rows)
     #write_insert_footer("regencies")
 
 
@@ -85,7 +85,7 @@ def write_districts(path):
     rows = csv_to_list(path)
     level='KEC'
     #write_insert_header("districts")
-    write_insert_body("lokasi",level, rows)
+    write_insert_body("wilayahID",level, rows)
     #write_insert_footer("districts")
 
 
@@ -93,8 +93,8 @@ def write_villages(path):
     rows = csv_to_list(path)
     level='DESA'
     #write_insert_header("villages")
-    write_insert_body("lokasi",level, rows)
-    write_insert_footer("lokasi")
+    write_insert_body("wilayahID",level, rows)
+    write_insert_footer("wilayahID")
 
 
 def main(argv):
